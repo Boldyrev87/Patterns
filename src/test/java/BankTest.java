@@ -1,4 +1,6 @@
 
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.Keys;
 
@@ -15,6 +17,15 @@ public class BankTest {
         open("http://localhost:9999");
     }
 
+    @BeforeAll
+    static void setUpAll() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+    }
+
+    @AfterAll
+    static void tearDownALl() {
+        SelenideLogger.removeListener("allure");
+    }
 
     @Test
     @DisplayName("Should successful plan and replan meeting")
